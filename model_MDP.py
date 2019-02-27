@@ -13,7 +13,7 @@ class MDP(ENVIRONMENT):
         self.num_simulations = int(num_simulations)
 
     def run_one_simulation(self, is_printing=True):
-        self.current_state, self.done = self.reset() 
+        self.current_state, self.done = self.reset()
         
         while not self.done:
             action = np.random.choice(self.actions, 
@@ -21,8 +21,8 @@ class MDP(ENVIRONMENT):
             prob = self.policy[self.current_state, action] 
             self.reward, next_state, self.done, self.info, self.final_reward = self.step(action, prob)
             
-            if is_printing:
-                msg = "s: {:2}, a: {}, r: {:5.2f}, s1: {:2}, done: {:1}, info: {}, final_reward: {}" 
+            if is_printing: 
+                msg = "s: {:2}, a: {}, r: {:5.2f}, s1: {:2}, done: {:1}, info: {}, final_reward: {}"
                 print(msg.format(self.current_state, action, self.reward, next_state, \
                                  self.done, self.info, self.final_reward))
                 
@@ -57,7 +57,7 @@ class MDP(ENVIRONMENT):
         
         
 class IPE_V(MDP):
-    def __init__(self, policy, battery_consumption=-0.02, gamma=0.99, num_iteration=10):
+    def __init__(self, policy, battery_consumption=-0.02, gamma=0.99, num_iteration=100):
         super().__init__(policy, battery_consumption=battery_consumption, gamma=gamma)
         self.num_iteration = int(num_iteration)
 
