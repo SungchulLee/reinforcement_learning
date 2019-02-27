@@ -119,7 +119,6 @@ class ENVIRONMENT:
         """
         self.current_state = np.random.choice(self.non_terminal_states)
         self.done = False
-        self.reward = self.battery_consumption
         self.final_reward = None
         return self.current_state, self.done
     
