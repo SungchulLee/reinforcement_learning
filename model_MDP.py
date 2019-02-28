@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from dqn_env import ENVIRONMENT
+from env import ENVIRONMENT
 from dqn_policy import POLICY
 import dqn_ops as ops
 
