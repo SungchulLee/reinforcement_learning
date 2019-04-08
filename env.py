@@ -21,13 +21,13 @@ In dqn_env.py we assume that we don't know where are the boundaries.
 We cannot effectively implement the boundary behaviour at state 3 and 6.
 So, in this case we set
         if next_state == self.win_state:
-            self.reward += 1.        # happy ending
-            #self.final_reward = 1.  # happy ending
-            self.done = True         # game over
+            self.reward += self.gamma * 1. # happy ending
+            #self.final_reward = 1.        # happy ending
+            self.done = True               # game over
         if next_state == self.lose_state:
-            self.reward += -1.       # unhappy ending
-            #self.final_reward = -1. # unhappy ending
-            self.done = True         # game over
+            self.reward -= self.gamma * 1. # unhappy ending
+            #self.final_reward = -1.       # unhappy ending
+            self.done = True               # game over
 """
 
 

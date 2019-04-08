@@ -21,13 +21,13 @@ In dqn_env.py we assume that we don't know where are the boundaries.
 We cannot effectively implement the boundary behaviour at state 3 and 6.
 So, in this case we set
         if next_state == self.win_state:
-            self.reward += 1.        # happy ending
-            #self.final_reward = 1.  # happy ending
-            self.done = True         # game over
+            self.reward += self.gamma * 1. # happy ending
+            #self.final_reward = 1.        # happy ending
+            self.done = True               # game over
         if next_state == self.lose_state:
-            self.reward += -1.       # unhappy ending
-            #self.final_reward = -1. # unhappy ending
-            self.done = True         # game over
+            self.reward -= self.gamma * 1. # unhappy ending
+            #self.final_reward = -1.       # unhappy ending
+            self.done = True               # game over
 """
 
 
@@ -147,12 +147,21 @@ class ENVIRONMENT:
         2. Set self.done as False.
         
         3. Set self.final_reward as None
+        
+        4. Reset Reward function.
+        Since self.reward has been modified as self.reward +- 1 
+        at the end of the last epoch,
+        we have to reset reward function.
 
-        4. Return initial_state
+        5. Return initial_state
         """
         self.current_state = np.random.choice(self.non_terminal_states)
         self.done = False
         self.final_reward = None
+        
+        " Reward "
+        self.reward = self.battery_consumption # pay for battery consumption
+        
         return self.current_state, self.done
     
     def action(self):
@@ -178,13 +187,13 @@ class ENVIRONMENT:
                                       p=self.P[self.current_state, action, :])
         
         if next_state == self.win_state:
-            self.reward += 1.        # happy ending
-            #self.final_reward = 1.  # happy ending
-            self.done = True         # game over
+            self.reward += self.gamma * 1. # happy ending
+            #self.final_reward = 1.        # happy ending
+            self.done = True               # game over
         if next_state == self.lose_state:
-            self.reward += -1.       # unhappy ending
-            #self.final_reward = -1. # unhappy ending
-            self.done = True         # game over
+            self.reward -= self.gamma * 1. # unhappy ending
+            #self.final_reward = -1.       # unhappy ending
+            self.done = True               # game over
 
         return self.reward, next_state, self.done, self.info, self.final_reward
 
