@@ -86,14 +86,13 @@ class Policy:
 
     def __init__(self, policy='random', np_seed=1):
         np.random.seed(np_seed)
+        
+        N_STATES = 11
+        N_ACTIONS = 4
 
         if policy == 'random':
-            N_STATES = 11
-            N_ACTIONS = 4
             self.policy = 0.25 * np.ones((N_STATES, N_ACTIONS))
         elif policy == 'bad':
-            N_STATES = 11
-            N_ACTIONS = 4
             self.policy = np.empty((N_STATES, N_ACTIONS))
             self.policy[0, :] = [0, 1, 0, 0]
             self.policy[1, :] = [0, 1, 0, 0]
@@ -107,8 +106,6 @@ class Policy:
             self.policy[9, :] = [0, 0, 1, 0]
             self.policy[10, :] = [0, 0, 1, 0]
         elif policy == 'optimal':
-            N_STATES = 11
-            N_ACTIONS = 4
             self.policy = np.empty((N_STATES, N_ACTIONS))
             self.policy[0, :] = [0, 1, 0, 0]
             self.policy[1, :] = [0, 1, 0, 0]
